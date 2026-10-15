@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#080f20" />
+  <meta name="description" content="FinLab: apresentação interativa sobre juros, investimentos, inflação e empreendedorismo, com seis missões." />
+  <title>FinLab | Missões financeiras — Slides interativos</title>
+  <style>
+    :root{
+      --bg:#080f20;--surface:#101c31;--surface2:#15223a;--line:#263752;--ink:#f3f6fb;--muted:#afbdd2;
+      --mint:#79e2b9;--lime:#c1f38c;--amber:#ffc781;--lav:#ada7ff;--coral:#ffadac;
+      --page-pad:clamp(16px,4vw,72px);--radius:22px;
+    }
+    *{box-sizing:border-box}
+    html{height:100%;background:var(--bg)}
+    body{margin:0;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;min-height:100dvh;overflow:hidden;background:radial-gradient(ellipse at 95% 0%,#1e3049 0%,transparent 46%),radial-gradient(ellipse at 0% 100%,#132f37 0%,transparent 32%),var(--bg)}
+    button,input,select,textarea{font:inherit}
+    button{cursor:pointer}
+    button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--mint);outline-offset:3px}
+    a{color:var(--mint)}
+    .shell{height:100dvh;display:flex;flex-direction:column;max-width:1760px;margin:0 auto;min-width:0}
+    .topbar{height:76px;flex:none;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 var(--page-pad);border-bottom:1px solid #ffffff15}
+    .logo{display:flex;align-items:center;gap:11px;font-weight:900;font-size:22px;letter-spacing:-1.1px;white-space:nowrap}
+    .mark{width:32px;height:32px;border-radius:9px;background:var(--mint);display:grid;place-items:center;transform:rotate(-10deg);color:#071a22;font-weight:1000;font-size:22px}
+    .project-name{font-size:12px;color:var(--muted);letter-spacing:.13em;font-weight:800;text-transform:uppercase;white-space:nowrap}
+    .top-actions{display:flex;align-items:center;gap:10px}
+    .btn-icon,.btn-outline,.btn-solid{border:1px solid #ffffff25;border-radius:12px;min-height:40px;display:inline-flex;align-items:center;justify-content:center;gap:8px;color:var(--ink);background:#ffffff0a;font-weight:750;transition:.15s transform,.15s background;line-height:1.2}
+    .btn-icon:hover,.btn-outline:hover{background:#ffffff18;transform:translateY(-1px)}
+    .btn-icon{min-width:40px;padding:8px 12px}
+    .btn-outline{padding:11px 17px}
+    .btn-solid{padding:12px 20px;color:#081b23;border-color:var(--mint);background:var(--mint)}
+    .btn-solid:hover{background:#a0f6d0;transform:translateY(-1px)}
+    a.btn-solid{text-decoration:none;text-align:center}
+    .teacher-on{border-color:var(--amber);color:var(--amber)}
+    main{min-height:0;flex:1;position:relative}
+    .slide{display:none;height:100%;overflow:auto;padding:clamp(24px,3.4vh,45px) var(--page-pad);scrollbar-color:#60738f transparent;animation:reveal .26s ease-out}
+    .slide.active{display:flex;flex-direction:column}
+    @keyframes reveal{from{opacity:.3;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
+    .slide-header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:clamp(11px,2.2vh,25px)}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;text-transform:uppercase;letter-spacing:.15em;font-weight:850;font-size:12px;color:var(--mint)}
+    .eyebrow::before{content:"";width:7px;height:7px;background:currentColor;border-radius:50%}
+    .slide-tag{font-size:12px;color:var(--muted);font-weight:650}
+    h1,h2,h3,p{margin-top:0}
+    h1{font-size:clamp(45px,6.8vw,100px);line-height:.99;letter-spacing:-.067em;margin-bottom:22px;max-width:1080px}
+    h2{font-size:clamp(30px,4.4vw,67px);line-height:1.05;letter-spacing:-.055em;margin-bottom:12px;max-width:1250px}
+    h3{font-size:clamp(17px,1.7vw,25px);line-height:1.2;letter-spacing:-.025em;margin-bottom:12px}
+    .lead{color:var(--muted);font-size:clamp(16px,1.55vw,23px);line-height:1.48;max-width:930px}
+    .small{color:var(--muted);font-size:13px;line-height:1.55}
+    .micro{color:var(--muted);font-size:11px;line-height:1.5}
+    .accent{color:var(--mint)}.accent-violet{color:var(--lav)}.accent-amber{color:var(--amber)}
+    .grid{display:grid;gap:clamp(12px,1.7vw,24px)}
+    .grid-2{grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr)}
+    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .panel{padding:clamp(17px,2vw,30px);border:1px solid var(--line);background:linear-gradient(140deg,#ffffff0a,#ffffff03);border-radius:var(--radius);min-width:0}
+    .panel-soft{background:var(--surface)}
+    .panel-mint{background:linear-gradient(125deg,#153f3f,#132536);border-color:#356b67}
+    .panel-lav{background:linear-gradient(130deg,#282544,#181e39);border-color:#514970}
+    .panel-amber{background:linear-gradient(125deg,#4b342a,#252132);border-color:#775444}
+    .kicker{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--muted);margin:0 0 12px}
+    .big-num{font-weight:850;font-size:clamp(29px,3vw,47px);letter-spacing:-.06em;line-height:1.05;margin-bottom:5px;overflow-wrap:anywhere}
+    .pill{display:inline-flex;align-items:center;border:1px solid #ffffff35;padding:7px 11px;border-radius:40px;color:var(--muted);font-weight:750;font-size:12px;letter-spacing:.035em}
+    .chip{background:#ffffff13;border-radius:9px;padding:7px 11px;font-weight:800;color:var(--ink);display:inline-block}
+    .stack{display:flex;flex-direction:column;gap:clamp(10px,1.4vw,19px)}
+    .hero{justify-content:center;position:relative;gap:18px}
+    .hero .visual{position:absolute;right:7%;top:10%;width:min(33vw,460px);opacity:.94;pointer-events:none}
+    .hero .lead{max-width:740px}
+    .hero .hero-copy{position:relative;z-index:1}
+    .ribbon{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+    .hero-action{margin-top:22px;display:flex;align-items:center;gap:17px;flex-wrap:wrap}
+    .underline-line{height:1px;background:var(--line);margin:7px 0}
+    .stat-row{display:flex;align-items:center;gap:12px;justify-content:space-between;padding:12px 0;border-bottom:1px solid #ffffff12}
+    .stat-row:last-child{border:0}
+    .stat-row strong{font-size:clamp(18px,1.6vw,25px)}
+    .field{display:flex;flex-direction:column;gap:9px;margin-bottom:18px}
+    .field:last-child{margin-bottom:0}
+    .field-top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+    .field-top label{font-weight:650;font-size:14px;color:var(--muted)}
+    .field-top output{color:var(--ink);font-weight:850;font-variant-numeric:tabular-nums}
+    input[type=range]{width:100%;accent-color:var(--mint);cursor:pointer;height:20px}
+    .choice-grid{display:grid;gap:10px;grid-template-columns:repeat(2,minmax(0,1fr))}
+    .choice{border:1px solid var(--line);background:#ffffff0a;border-radius:15px;color:var(--ink);text-align:left;padding:16px;font-weight:800;line-height:1.35;min-height:57px}
+    .choice:hover{border-color:var(--mint);background:#9affdc12}
+    .choice.selected{border-color:var(--mint);background:#79e2b917;color:var(--mint)}
+    .choice.correct{border-color:var(--mint);background:#1d4e45}
+    .choice.wrong{border-color:var(--coral);background:#5b2e394d}
+    .feedback{margin-top:13px;border-radius:13px;padding:12px 15px;font-size:14px;line-height:1.48;background:#ffffff0d;border:1px solid #ffffff12;min-height:45px;color:var(--muted)}
+    .feedback.ok{color:var(--mint);border-color:#356b67;background:#153c36}
+    .feedback.no{color:#ffc9bf;border-color:#875453;background:#452c37}
+    .mini-bars{display:flex;flex-direction:column;gap:15px}
+    .bar-row{display:grid;grid-template-columns:88px 1fr 125px;gap:12px;align-items:center;font-size:13px}
+    .bar-row span:first-child{color:var(--muted)}
+    .bar-track{height:21px;position:relative;background:#ffffff0d;border-radius:6px;overflow:hidden}
+    .bar-fill{height:100%;background:var(--mint);width:50%;transition:width .2s;border-radius:6px}
+    .bar-fill.violet{background:var(--lav)}.bar-fill.amber{background:var(--amber)}
+    .bar-row strong{text-align:right;font-size:13px;font-variant-numeric:tabular-nums}
+    #loanA,#loanB{font-size:clamp(23px,2.3vw,34px);white-space:nowrap;letter-spacing:-.06em}
+    #bizProfit{font-size:clamp(23px,2.65vw,40px);white-space:nowrap}
+    .two-values{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .two-values .panel{padding:17px}
+    .callout{padding:17px 20px;border:1px solid #ffc7815e;background:#ffc78112;border-radius:14px;line-height:1.5}
+    .callout strong{color:var(--amber)}
+    .note{border-left:3px solid var(--mint);padding:8px 0 8px 15px;line-height:1.5;color:var(--muted)}
+    .formula{font-size:clamp(15px,1.5vw,22px);background:#070f1d;border:1px solid var(--line);border-radius:12px;padding:12px 15px;color:#aff4ce;overflow-wrap:anywhere;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+    .teacher-answer{display:none;margin-top:12px;background:#4a391e;color:#ffe2b0;border:1px solid #96753c;padding:11px 13px;border-radius:11px;font-size:13px;line-height:1.5}
+    body.teacher .teacher-answer{display:block}
+    .plot{width:100%;height:clamp(150px,25vh,310px);display:block;overflow:visible}
+    .plot .axis{stroke:#42536b;stroke-width:1.3}.plot .gridline{stroke:#33465b;stroke-dasharray:4 7;stroke-width:1}.plot text{fill:#9fb1c8;font-family:inherit;font-size:12px}
+    .plot .line-a{fill:none;stroke:var(--mint);stroke-width:4;stroke-linecap:round}.plot .line-b{fill:none;stroke:var(--lav);stroke-width:4;stroke-linecap:round}
+    .step{display:flex;gap:15px;align-items:flex-start}
+    .step-number{border:1px solid #ffffff33;min-width:36px;height:36px;border-radius:10px;display:grid;place-items:center;font-weight:900;color:var(--mint)}
+    .step div{min-width:0}.step strong{font-size:16px}.step p{margin:5px 0 0;color:var(--muted);font-size:14px;line-height:1.45}
+    select,input[type=text],textarea{width:100%;border-radius:12px;border:1px solid #51627e;background:#0b1629;color:var(--ink);padding:13px 15px;outline:0}
+    option{color:var(--ink);background:#0b1629}
+    textarea{min-height:130px;resize:vertical;line-height:1.55}
+    .goal-card{background:#101c30;border-radius:15px;border:1px solid var(--line);padding:16px;display:flex;flex-direction:column;gap:10px}
+    .goal-card h3{margin:0}.goal-card p{margin:0;color:var(--muted);font-size:14px;flex:1}
+    .mission-marker{display:inline-block;min-width:35px;text-align:center;background:#79e2b91b;color:var(--mint);padding:8px;border-radius:9px;font-weight:900}
+    .mission-row{display:flex;align-items:center;gap:15px;padding:12px 0;border-bottom:1px solid #ffffff12}
+    .mission-row:last-child{border:0}
+    .mission-row .done{margin-left:auto;font-weight:900;color:var(--mint)}
+    .star{font-size:clamp(50px,9vw,128px);color:var(--amber);line-height:1}
+    .donut{width:170px;height:170px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--mint) var(--complete),#34425a 0)}
+    .donut>div{width:133px;height:133px;border-radius:50%;background:#0a1426;display:flex;flex-direction:column;align-items:center;justify-content:center}
+    .donut strong{font-size:44px;letter-spacing:-.06em}
+    .donut small{color:var(--muted)}
+    .footer{height:68px;flex:none;display:flex;gap:22px;justify-content:space-between;align-items:center;padding:0 var(--page-pad);border-top:1px solid #ffffff15;background:#07112185}
+    .footer-left{display:flex;gap:12px;align-items:center;min-width:0;flex:1}
+    .counter{font-size:13px;font-weight:850;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+    .progress{display:flex;gap:4px;align-items:center;flex:1;max-width:370px}
+    .dot{border:0;height:7px;background:#354760;flex:1;padding:0;border-radius:6px;min-width:4px;transition:background .2s,transform .2s}
+    .dot.active{background:var(--mint);transform:scaleY(1.6)}.dot.past{background:#7094a1}
+    .nav-actions{display:flex;align-items:center;gap:8px}
+    .keys{color:var(--muted);font-size:12px;white-space:nowrap}
+    .nav-actions button:disabled{opacity:.32;cursor:not-allowed;transform:none}
+    .legend{display:flex;flex-wrap:wrap;gap:18px;font-size:13px;color:var(--muted)}
+    .legend i{display:inline-block;width:11px;height:11px;background:var(--mint);border-radius:3px;margin-right:7px}.legend i.violet{background:var(--lav)}
+    .matrix{width:100%;border-collapse:collapse;font-size:14px}
+    .matrix td,.matrix th{padding:12px 10px;text-align:left;border-bottom:1px solid #ffffff18}
+    .matrix th{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.07em}
+    .matrix td:last-child{text-align:right;font-weight:750}
+    .matte{background:#081626;border-radius:15px;border:1px solid var(--line);padding:20px}
+    .mini-title{font-size:13px;color:var(--muted);margin-bottom:8px}
+    .mission-step{background:#ffffff09;padding:12px;border-radius:11px;margin-top:10px}
+    @media(max-width:850px){
+      .topbar{height:64px}.footer{height:70px}.slide{padding:22px 20px}.project-name,.keys{display:none}
+      .grid-2{grid-template-columns:1fr}.grid-3,.grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .hero{justify-content:flex-start}.hero .visual{position:relative;right:auto;top:auto;width:180px;margin:-8px auto -12px;opacity:.85;order:3}.hero .hero-copy{order:1}
+      .hero-action{margin-top:12px}.panel{padding:17px}
+      .plot{height:190px}
+    }
+    @media(max-width:520px){
+      .logo{font-size:20px}.btn-icon{min-width:35px;padding:8px}.top-actions{gap:5px}
+      .grid-3,.grid-4{grid-template-columns:1fr}.choice-grid{grid-template-columns:1fr}
+      h1{font-size:50px}h2{font-size:35px}.footer{padding:0 14px;gap:8px}.footer-left{gap:7px}
+      .bar-row{grid-template-columns:63px 1fr 99px;gap:8px;font-size:12px}.bar-row strong{font-size:11px}
+      .nav-actions .btn-outline{padding:9px 10px;min-width:38px}.keys,.slide-tag{display:none}
+    }
+    @media (prefers-reduced-motion:reduce){.slide,.bar-fill,.dot,.btn-icon,.btn-outline,.btn-solid{animation:none;transition:none}}
+    @media print{
+      body{overflow:visible;background:white;color:black}.topbar,.footer,.teacher-answer{display:none!important}.shell{height:auto}
+      .slide,.slide.active{display:block;height:auto;page-break-after:always;overflow:visible;color:#111;background:white;padding:15mm}
+      .panel,.goal-card,.matte,.formula,.callout{background:white;color:#111;border-color:#ccc}
+      .ribbon a.btn-solid{display:none!important}
+      h1,h2,h3,.kicker,.lead,.small,.micro{color:#111}.chart{display:none}
+    }
+  </style>
+</head>
+<body>
+<div class="shell">
+  <header class="topbar">
+    <div class="logo"><span class="mark" aria-hidden="true">F</span> finlab<span style="color:var(--mint)">.</span></div>
+    <div class="project-name">Oficina de decisões financeiras / Ensino Médio &amp; Técnico</div>
+    <div class="top-actions">
+      <button class="btn-icon" id="teacherBtn" title="Mostrar/ocultar respostas do professor" aria-pressed="false">◉ <span class="hide-mobile" style="font-size:12px">Professor</span></button>
+      <button class="btn-icon" id="fullscreenBtn" title="Tela cheia (F)" aria-label="Alternar tela cheia">⛶</button>
+    </div>
+  </header>
+  <main id="deck" aria-live="polite">
+    <!-- 1 -->
+    <section class="slide hero active" data-title="Capa">
+      <svg class="visual" viewBox="0 0 500 500" aria-hidden="true"><circle cx="249" cy="245" r="171" fill="none" stroke="#263d50" stroke-width="2" stroke-dasharray="9 14"/><circle cx="249" cy="245" r="134" fill="none" stroke="#416366" stroke-width="2"/><path d="M115 340L202 281L268 313L386 131" fill="none" stroke="#79e2b9" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/><path d="M346 133h43v42" fill="none" stroke="#79e2b9" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/><circle cx="200" cy="281" r="17" fill="#ada7ff"/><circle cx="268" cy="313" r="15" fill="#ffc781"/><circle cx="115" cy="340" r="14" fill="#ada7ff"/><circle cx="249" cy="245" r="203" fill="none" stroke="#ffffff18" stroke-width="1"/></svg>
+      <div class="hero-copy">
+        <div class="ribbon"><span class="pill">6 missões práticas</span><span class="pill">Slides interativos</span><span class="pill">100% no navegador</span></div>
+        <p class="eyebrow" style="margin-top:30px">Aprender fazendo</p>
+        <h1>Seu dinheiro.<br>Sua decisão.<br><span class="accent">Seu futuro.</span></h1>
+        <p class="lead">Juros, renda fixa, inflação e empreendedorismo. Aqui ninguém só assiste: você calcula, escolhe, testa e explica.</p>
+        <div class="hero-action"><button class="btn-solid" onclick="go(1)">Começar apresentação <span aria-hidden="true">→</span></button><span class="small">Use ← → para mudar de slide</span></div>
+      </div>
+    </section>
+    <!-- 2 -->
+    <section class="slide" data-title="Regras">
+      <div class="slide-header"><span class="eyebrow">Bem-vindo ao laboratório</span><span class="slide-tag">00 / Preparação</span></div>
+      <h2>Não existe aprendizado<br><span class="accent">sem experimentar.</span></h2>
+      <p class="lead">Em duplas ou trios, resolvam as missões, expliquem suas decisões e registrem o que descobriram.</p>
+      <div class="grid grid-3" style="margin-top:10px">
+        <div class="panel panel-mint"><div class="big-num">01</div><h3>Explore</h3><p class="small">Mude os valores nos simuladores. Observe o que acontece e formule uma hipótese.</p></div>
+        <div class="panel panel-lav"><div class="big-num">02</div><h3>Decida</h3><p class="small">Escolha uma resposta e receba feedback. Você pode tentar novamente.</p></div>
+        <div class="panel panel-amber"><div class="big-num">03</div><h3>Defenda</h3><p class="small">Uma decisão só é completa quando você consegue justificá-la com dados.</p></div>
+      </div>
+      <div class="callout" style="margin-top:18px"><strong>Regra de ouro:</strong> resultados dos simuladores são hipotéticos. No mundo real, taxas, custos, impostos, risco e liquidez precisam ser considerados.</div>
+    </section>
+    <!-- 3 -->
+    <section class="slide" data-title="Enredo">
+      <div class="slide-header"><span class="eyebrow">O desafio começa</span><span class="slide-tag">Situação inicial</span></div>
+      <h2>Você quer abrir<br><span class="accent">um negócio.</span></h2>
+      <p class="lead">Uma pequena empresa de jardinagem precisa de equipamentos para começar. Você dispõe de pouco capital e considera pegar um empréstimo.</p>
+      <div class="grid grid-3" style="margin-top:10px">
+        <div class="panel"><p class="kicker">Equipamentos</p><div class="big-num">R$ 5.000</div><p class="small">Investimento inicial estimado</p></div>
+        <div class="panel"><p class="kicker">Taxa anunciada</p><div class="big-num">2% <span style="font-size:18px">a.m.</span></div><p class="small">Igual nos dois bancos</p></div>
+        <div class="panel"><p class="kicker">Prazo</p><div class="big-num">8 meses</div><p class="small">Quitação integral no vencimento</p></div>
+      </div>
+      <div class="note" style="margin-top:24px">Pergunta: duas propostas com a mesma taxa de 2% ao mês precisam ter o mesmo custo final?</div>
+    </section>
+    <!-- 4 -->
+    <section class="slide" data-title="Missão 1 — Empréstimo">
+      <div class="slide-header"><span class="eyebrow">Missão 01 / Banco misterioso</span><span class="slide-tag">Interaja com os controles</span></div>
+      <h2>Qual banco custa <span class="accent">menos?</span></h2>
+      <div class="grid grid-2">
+        <div class="panel stack">
+          <div class="field"><div class="field-top"><label for="loanCapital">Capital solicitado</label><output id="loanCapitalOut"></output></div><input type="range" id="loanCapital" min="1000" max="15000" step="500" value="5000"></div>
+          <div class="field"><div class="field-top"><label for="loanRate">Taxa mensal</label><output id="loanRateOut"></output></div><input type="range" id="loanRate" min="0" max="8" step="0.5" value="2"></div>
+          <div class="field"><div class="field-top"><label for="loanMonths">Prazo</label><output id="loanMonthsOut"></output></div><input type="range" id="loanMonths" min="1" max="36" step="1" value="8"></div>
+          <div class="field"><div class="field-top"><label for="loanFee">Taxa única do Banco A</label><output id="loanFeeOut"></output></div><input type="range" id="loanFee" min="0" max="500" step="25" value="150"></div>
+          <p class="micro">Modelo: juros simples no A, compostos no B, pagamento único ao final. Taxa administrativa do A cobrada só no vencimento.</p>
+        </div>
+        <div class="stack">
+          <div class="grid grid-2" style="gap:10px">
+            <div class="panel panel-mint"><p class="kicker">Banco A · simples + tarifa</p><div class="big-num" id="loanA">—</div><div class="small">Total a pagar</div></div>
+            <div class="panel panel-lav"><p class="kicker">Banco B · compostos</p><div class="big-num" id="loanB">—</div><div class="small">Total a pagar</div></div>
+          </div>
+          <div class="panel"><p class="kicker">Sua decisão</p><div class="choice-grid"><button class="choice" data-credit="A">Escolho o Banco A</button><button class="choice" data-credit="B">Escolho o Banco B</button></div><div class="feedback" id="loanFeedback">Compare os totais e escolha a proposta mais barata.</div><div class="teacher-answer">Gabarito inicial: Banco A = R$ 5.950,00; Banco B = R$ 5.858,30. Banco B custa R$ 91,70 menos. Experimente zerar a taxa do A.</div></div>
+        </div>
+      </div>
+    </section>
+    <!-- 5 -->
+    <section class="slide" data-title="Como crescem os juros">
+      <div class="slide-header"><span class="eyebrow">Entenda os números</span><span class="slide-tag">Conceitos fundamentais</span></div>
+      <h2>Mesma taxa. <span class="accent-violet">Curvas diferentes.</span></h2>
+      <div class="grid grid-2">
+        <div class="panel"><h3>O que acontece a cada mês?</h3><svg id="interestChart" class="plot" viewBox="0 0 600 290" role="img" aria-label="Gráfico comparativo de montantes com juros simples e compostos ao longo de oito meses"><line x1="45" y1="235" x2="578" y2="235" class="axis"/><line x1="45" y1="22" x2="45" y2="235" class="axis"/><line x1="45" y1="129" x2="578" y2="129" class="gridline"/><path id="simplePath" class="line-a" d=""/><path id="compoundPath" class="line-b" d=""/><text x="46" y="260">Início</text><text x="538" y="260">Mês 8</text><text x="49" y="17">R$</text></svg><div class="legend"><span><i></i>Juros simples</span><span><i class="violet"></i>Juros compostos</span></div></div>
+        <div class="stack">
+          <div class="panel"><h3>Juros simples</h3><p class="small">O acréscimo é sempre calculado sobre o capital inicial.</p><div class="formula">M = C × (1 + i × n)</div></div>
+          <div class="panel"><h3>Juros compostos</h3><p class="small">O saldo de cada período vira a base para o próximo.</p><div class="formula">M = C × (1 + i)<sup>n</sup></div></div>
+          <div class="callout"><strong>Repare:</strong> no primeiro mês os montantes coincidem; a diferença aparece a partir do segundo mês, se a taxa for positiva.</div>
+        </div>
+      </div>
+    </section>
+    <!-- 6 -->
+    <section class="slide" data-title="Missão 2 — Patrimônio">
+      <div class="slide-header"><span class="eyebrow">Missão 02 / Investidor iniciante</span><span class="slide-tag">Simulação de aportes</span></div>
+      <h2>O tempo trabalha <span class="accent">a favor de quem?</span></h2>
+      <div class="grid grid-2">
+        <div class="panel stack">
+          <div class="field"><div class="field-top"><label for="invInitial">Capital inicial</label><output id="invInitialOut"></output></div><input type="range" id="invInitial" min="0" max="30000" step="1000" value="5000"></div>
+          <div class="field"><div class="field-top"><label for="invMonthly">Aporte mensal</label><output id="invMonthlyOut"></output></div><input type="range" id="invMonthly" min="0" max="1500" step="50" value="200"></div>
+          <div class="field"><div class="field-top"><label for="invRate">Rentabilidade anual hipotética</label><output id="invRateOut"></output></div><input type="range" id="invRate" min="0" max="18" step="1" value="10"></div>
+          <div class="field"><div class="field-top"><label for="invYears">Tempo investindo</label><output id="invYearsOut"></output></div><input type="range" id="invYears" min="1" max="30" step="1" value="10"></div>
+        </div>
+        <div class="stack">
+          <div class="panel panel-mint"><p class="kicker">Patrimônio projetado</p><div class="big-num" id="invTotal">—</div><p class="small">Resultado hipotético antes de inflação, custos e impostos</p></div>
+          <div class="panel"><div class="mini-bars"><div class="bar-row"><span>Depositado</span><div class="bar-track"><div class="bar-fill" id="invPaidBar"></div></div><strong id="invPaid">—</strong></div><div class="bar-row"><span>Rendimento</span><div class="bar-track"><div class="bar-fill violet" id="invEarnBar"></div></div><strong id="invEarn">—</strong></div></div></div>
+          <div class="panel"><p class="kicker">Pergunta de atenção</p><p>Qual parte representa o dinheiro que você efetivamente colocou?</p><div class="choice-grid"><button class="choice" data-inv="paid">Depósitos + aportes</button><button class="choice" data-inv="earned">Somente rendimento</button></div><div class="feedback" id="invFeedback">Responda para completar a missão.</div></div>
+        </div>
+      </div>
+      <p class="micro" style="margin-top:10px">Cálculo: taxa anual efetiva hipotética convertida em taxa mensal equivalente; aportes ao fim de cada mês, taxa constante, sem custos ou tributos. Não representa rentabilidade garantida.</p>
+    </section>
+    <!-- 7 -->
+    <section class="slide" data-title="Missão 3 — Inflação">
+      <div class="slide-header"><span class="eyebrow">Missão 03 / Inflação invisível</span><span class="slide-tag">Valor real × nominal</span></div>
+      <h2>Ganhar dinheiro é diferente<br>de <span class="accent">ganhar poder de compra.</span></h2>
+      <div class="grid grid-2">
+        <div class="panel stack">
+          <div class="field"><div class="field-top"><label for="infReturn">Rentabilidade nominal anual</label><output id="infReturnOut"></output></div><input type="range" id="infReturn" min="0" max="20" step="1" value="10"></div>
+          <div class="field"><div class="field-top"><label for="infInflation">Inflação anual hipotética</label><output id="infInflationOut"></output></div><input type="range" id="infInflation" min="0" max="20" step="1" value="6"></div>
+          <div class="panel panel-soft"><p class="kicker">Rentabilidade REAL anual aproximada corretamente pela razão de fatores</p><div class="big-num" id="infReal">—</div><div class="formula" style="font-size:14px">(1 + nominal) ÷ (1 + inflação) − 1</div></div>
+        </div>
+        <div class="stack">
+          <div class="panel"><p class="kicker">R$ 1.000 hoje, poder de compra após 5 anos</p><div class="big-num" id="infPurchasing">—</div><p class="small">Equivalente em reais de hoje do valor nominal acumulado, sob hipóteses constantes.</p><div class="underline-line"></div><p class="small" id="infExplanation"></p></div>
+          <div class="panel"><p><strong>Se a inflação ficar acima do rendimento nominal, o poder de compra do investimento tende a…</strong></p><div class="choice-grid"><button class="choice" data-inf="rise">Aumentar</button><button class="choice" data-inf="fall">Diminuir</button></div><div class="feedback" id="infFeedback">Uma taxa nominal positiva não garante ganho real.</div></div>
+        </div>
+      </div>
+    </section>
+    <!-- 8 -->
+    <section class="slide" data-title="Tipos de renda fixa">
+      <div class="slide-header"><span class="eyebrow">Caixa de ferramentas</span><span class="slide-tag">Antes de escolher, entenda</span></div>
+      <h2>Nem toda renda fixa<br><span class="accent-violet">serve para a mesma meta.</span></h2>
+      <div class="grid grid-3">
+        <div class="panel panel-mint"><span class="pill">Liquidez</span><h3 style="margin-top:18px">Tesouro Selic</h3><p class="small">Geralmente utilizado em estratégias de reserva e liquidez. Pode oscilar e existem regras e horários para resgate.</p><div class="mission-step">Ponto de atenção: disponibilidade do dinheiro e preço no resgate.</div></div>
+        <div class="panel panel-lav"><span class="pill">Taxa conhecida</span><h3 style="margin-top:18px">Tesouro Prefixado</h3><p class="small">Permite conhecer a taxa contratada, mas o resultado prometido depende de levar o título até o vencimento e cumprir as condições.</p><div class="mission-step">Ponto de atenção: marcação a mercado ao vender antes.</div></div>
+        <div class="panel panel-amber"><span class="pill">Proteção contra inflação</span><h3 style="margin-top:18px">Tesouro IPCA+</h3><p class="small">Combina variação do IPCA com taxa real contratada. O preço também oscila antes do vencimento.</p><div class="mission-step">Ponto de atenção: prazo e possíveis perdas no resgate antecipado.</div></div>
+      </div>
+      <div class="note" style="margin-top:17px">CDB, LCI e LCA também podem ser considerados em carteiras de renda fixa, mas possuem regras próprias de emissor, liquidez, impostos e eventual cobertura do FGC. Não confunda garantia do Tesouro Nacional com garantia do FGC.</div>
+    </section>
+    <!-- 9 -->
+    <section class="slide" data-title="Missão 4 — Carteira">
+      <div class="slide-header"><span class="eyebrow">Missão 04 / Carteira sob medida</span><span class="slide-tag">Associar objetivo e instrumento</span></div>
+      <h2>O investimento certo<br>depende da <span class="accent">pergunta certa.</span></h2>
+      <p class="lead">Escolha o instrumento mais coerente com cada objetivo <strong>neste cenário didático</strong>.</p>
+      <div class="grid grid-3" style="margin-top:7px">
+        <div class="goal-card"><span class="mission-marker">A</span><h3>Emergência</h3><p>Pode precisar do dinheiro a qualquer momento.</p><label class="small" for="portfolioA">Instrumento preferido</label><select id="portfolioA"><option value="">Selecionar…</option><option value="selic">Tesouro Selic</option><option value="prefix">Tesouro Prefixado</option><option value="ipca">Tesouro IPCA+</option></select></div>
+        <div class="goal-card"><span class="mission-marker">B</span><h3>Meta de 3 anos</h3><p>Sabe a data de uso e quer taxa contratada, mantendo o título até um vencimento coincidente.</p><label class="small" for="portfolioB">Instrumento preferido</label><select id="portfolioB"><option value="">Selecionar…</option><option value="selic">Tesouro Selic</option><option value="prefix">Tesouro Prefixado</option><option value="ipca">Tesouro IPCA+</option></select></div>
+        <div class="goal-card"><span class="mission-marker">C</span><h3>Objetivo distante</h3><p>Busca proteção de poder de compra no longo prazo, até o vencimento do título.</p><label class="small" for="portfolioC">Instrumento preferido</label><select id="portfolioC"><option value="">Selecionar…</option><option value="selic">Tesouro Selic</option><option value="prefix">Tesouro Prefixado</option><option value="ipca">Tesouro IPCA+</option></select></div>
+      </div>
+      <div class="panel" style="margin-top:16px"><button class="btn-solid" id="checkPortfolio">Conferir escolhas →</button><div class="feedback" id="portfolioFeedback">As opções não são recomendações individuais de investimento.</div><div class="teacher-answer">Respostas didáticas: A = Tesouro Selic; B = Tesouro Prefixado com vencimento compatível; C = Tesouro IPCA+ com vencimento compatível. Na prática, o produto ideal depende de condições e alternativas disponíveis.</div></div>
+    </section>
+    <!-- 10 -->
+    <section class="slide" data-title="Missão 5 — Empreender">
+      <div class="slide-header"><span class="eyebrow">Missão 05 / Negócio próprio</span><span class="slide-tag">Simulador operacional</span></div>
+      <h2>O negócio pode pagar<br><span class="accent">o investimento?</span></h2>
+      <div class="grid grid-2">
+        <div class="panel stack">
+          <p class="small">Você abriu o serviço de jardinagem. Imagine os seguintes valores mensais, sem considerar impostos, depreciação e juros do financiamento:</p>
+          <div class="field"><div class="field-top"><label for="bizClients">Atendimentos por mês</label><output id="bizClientsOut"></output></div><input type="range" id="bizClients" min="0" max="40" step="1" value="20"></div>
+          <div class="field"><div class="field-top"><label for="bizPrice">Preço por atendimento</label><output id="bizPriceOut"></output></div><input type="range" id="bizPrice" min="80" max="320" step="10" value="180"></div>
+          <div class="field"><div class="field-top"><label for="bizVar">Custo variável por atendimento</label><output id="bizVarOut"></output></div><input type="range" id="bizVar" min="10" max="150" step="5" value="45"></div>
+          <div class="field"><div class="field-top"><label for="bizFixed">Custos fixos mensais</label><output id="bizFixedOut"></output></div><input type="range" id="bizFixed" min="0" max="2500" step="100" value="1000"></div>
+        </div>
+        <div class="stack">
+          <div class="grid grid-2" style="gap:10px"><div class="panel panel-mint"><p class="kicker">Resultado mensal*</p><div class="big-num" id="bizProfit">—</div></div><div class="panel panel-lav"><p class="kicker">Ponto de equilíbrio*</p><div class="big-num" id="bizBreakeven">—</div><p class="small">atendimentos/mês</p></div></div>
+          <div class="panel"><p class="kicker">Recuperar investimento inicial de R$ 5.000</p><h3 id="bizPayback">—</h3><p class="small">Estimativa simplificada, sem desconto financeiro e supondo resultado mensal constante.</p></div>
+          <div class="panel"><p class="kicker">Sua análise</p><div class="choice-grid"><button class="choice" data-biz="positive">O resultado é positivo</button><button class="choice" data-biz="nonpositive">É zero ou negativo</button></div><div class="feedback" id="bizFeedback">Confira os dados antes de decidir.</div></div>
+        </div>
+      </div>
+      <p class="micro" style="margin-top:9px">*“Resultado” e “ponto de equilíbrio” são operacionais e simplificados, não representam lucro líquido contábil, retorno garantido ou fluxo de caixa completo.</p>
+    </section>
+    <!-- 11 -->
+    <section class="slide" data-title="Missão 6 — Planilhas">
+      <div class="slide-header"><span class="eyebrow">Missão 06 / Código da planilha</span><span class="slide-tag">Google Planilhas</span></div>
+      <h2>Você consegue escrever<br><span class="accent">a fórmula?</span></h2>
+      <p class="lead">Na célula G1 está o capital, em G2 a taxa mensal de 2% e em A2 o mês. Qual fórmula calcula o montante de juros compostos e pode ser arrastada para as linhas seguintes?</p>
+      <div class="grid grid-2" style="margin-top:12px">
+        <div class="panel stack"><button class="choice" data-formula="wrong1" style="font-family:monospace">=G1*(1+G2*A2)</button><button class="choice" data-formula="right" style="font-family:monospace">=$G$1*(1+$G$2)^A2</button><button class="choice" data-formula="wrong2" style="font-family:monospace">=SOMA(G1:G2:A2)</button><div class="feedback" id="formulaFeedback">Pense nas potências e nas referências absolutas.</div></div>
+        <div class="panel panel-soft"><h3>Por que o cifrão importa?</h3><p class="small">Em uma fórmula copiada para baixo, <span class="chip">$G$1</span> e <span class="chip">$G$2</span> permanecem fixos; <span class="chip">A2</span> avança para A3, A4…</p><div class="underline-line"></div><p class="small">Desafio extra: crie uma tabela com os meses de 0 a 24 e compare a evolução de juros simples e compostos.</p><div class="teacher-answer">Correta: =$G$1*(1+$G$2)^A2. Em A2=0, montante = capital. É indispensável que G2 contenha 2% (0,02), e não o número 2.</div></div>
+      </div>
+    </section>
+    <!-- 12 -->
+    <section class="slide" data-title="Quiz 1">
+      <div class="slide-header"><span class="eyebrow">Reta final / Pergunta 01</span><span class="slide-tag">Desafio relâmpago</span></div>
+      <h2>Oito meses depois…<br><span class="accent">quem ganhou?</span></h2>
+      <div class="grid grid-2"><div class="panel panel-amber"><p class="kicker">Situação</p><div class="big-num">R$ 5.000</div><p class="lead">2% a.m. durante 8 meses, juros simples, sem tarifa. Quanto será pago no vencimento?</p><p class="small">Faça sua conta antes de clicar.</p></div><div class="panel"><h3>Escolha o montante</h3><div class="choice-grid"><button class="choice" data-quiz="q1" data-answer="a">R$ 5.160</button><button class="choice" data-quiz="q1" data-answer="b">R$ 5.800</button><button class="choice" data-quiz="q1" data-answer="c">R$ 5.858,30</button><button class="choice" data-quiz="q1" data-answer="d">R$ 6.000</button></div><div class="feedback" id="q1Feedback">Quanto representa 2% de R$ 5.000 por mês?</div><div class="teacher-answer">R$ 5.800. Juros = 5.000 × 0,02 × 8 = R$ 800.</div></div></div>
+    </section>
+    <!-- 13 -->
+    <section class="slide" data-title="Quiz 2">
+      <div class="slide-header"><span class="eyebrow">Reta final / Pergunta 02</span><span class="slide-tag">Desafio relâmpago</span></div>
+      <h2>Renda fixa significa<br><span class="accent-violet">preço sempre estável?</span></h2>
+      <div class="grid grid-2"><div class="panel panel-lav"><p class="lead">Uma pessoa compra um título prefixado e precisa vendê-lo antes do vencimento.</p><p class="small">O que pode acontecer com o valor de venda?</p></div><div class="panel"><div class="choice-grid"><button class="choice" data-quiz="q2" data-answer="a">Será sempre igual ao capital investido.</button><button class="choice" data-quiz="q2" data-answer="b">Será sempre maior.</button><button class="choice" data-quiz="q2" data-answer="c">Poderá ficar acima ou abaixo do valor esperado.</button><button class="choice" data-quiz="q2" data-answer="d">Será fixo porque a taxa é fixa.</button></div><div class="feedback" id="q2Feedback">Lembre-se da marcação a mercado.</div><div class="teacher-answer">Correta: pode ficar acima ou abaixo do esperado em razão das condições de mercado. Manter até o vencimento é diferente de vender antecipadamente.</div></div></div>
+    </section>
+    <!-- 14 -->
+    <section class="slide" data-title="Quiz 3">
+      <div class="slide-header"><span class="eyebrow">Reta final / Pergunta 03</span><span class="slide-tag">Desafio relâmpago</span></div>
+      <h2>Um bom gráfico<br><span class="accent">mostra o que importa.</span></h2>
+      <div class="grid grid-2"><div class="panel panel-mint"><h3>Situação</h3><p class="lead">Você precisa mostrar como o patrimônio de uma pessoa evoluiu durante 15 anos de aportes.</p><p class="small">Que visualização explica melhor a mudança ao longo do tempo?</p></div><div class="panel"><div class="choice-grid"><button class="choice" data-quiz="q3" data-answer="a">Gráfico de pizza com 15 fatias</button><button class="choice" data-quiz="q3" data-answer="b">Gráfico de linhas por ano</button><button class="choice" data-quiz="q3" data-answer="c">Uma imagem sem números</button><button class="choice" data-quiz="q3" data-answer="d">Apenas o valor final</button></div><div class="feedback" id="q3Feedback">Considere o objetivo de comparar uma série temporal.</div><div class="teacher-answer">Correta: gráfico de linhas por ano. O gráfico facilita identificar tendências e mudanças no tempo.</div></div></div>
+    </section>
+    <!-- 15 -->
+    <section class="slide" data-title="Parecer financeiro">
+      <div class="slide-header"><span class="eyebrow">Trabalho em equipe</span><span class="slide-tag">Entrega prática</span></div>
+      <h2>Uma decisão precisa<br><span class="accent">de justificativa.</span></h2>
+      <div class="grid grid-2">
+        <div class="panel stack"><h3>Seu parecer, em até 8 linhas</h3><label class="small" for="studentName">Nome ou equipe</label><input type="text" id="studentName" placeholder="Ex.: Equipe Oceano" maxlength="80"><label class="small" for="studentReport">Qual seria sua estratégia para financiar, investir ou começar o negócio? Cite dois números das simulações e um risco.</label><textarea id="studentReport" placeholder="Nossa equipe recomenda... porque... O risco a considerar é..."></textarea><div class="ribbon"><button class="btn-solid" id="saveReport">Salvar no navegador</button><button class="btn-outline" id="downloadReport">Baixar respostas (.txt)</button></div><p class="micro" id="saveStatus">Os dados ficam apenas neste navegador.</p></div>
+        <div class="panel"><h3>Critérios de uma boa resposta</h3><div class="stack"><div class="step"><span class="step-number">1</span><div><strong>Uma decisão objetiva</strong><p>Diga explicitamente qual alternativa escolheria.</p></div></div><div class="step"><span class="step-number">2</span><div><strong>Dois dados calculados</strong><p>Informe os valores utilizados para comparar opções.</p></div></div><div class="step"><span class="step-number">3</span><div><strong>Um risco ou limitação</strong><p>Considere inflação, prazo, liquidez ou custos ocultos.</p></div></div><div class="step"><span class="step-number">4</span><div><strong>Uma conclusão própria</strong><p>Explique como a planilha ajudou a decidir.</p></div></div></div></div>
+      </div>
+    </section>
+    <!-- 16 -->
+    <section class="slide" data-title="Resultados">
+      <div class="slide-header"><span class="eyebrow">Conclusão / Seu painel</span><span class="slide-tag">Progresso local</span></div>
+      <h2>Seu próximo investimento:<br><span class="accent">conhecimento.</span></h2>
+      <div class="ribbon" style="margin:0 0 17px"><a class="btn-solid" href="finlab-ficha-imprimivel.pdf" download="finlab-ficha-imprimivel.pdf" type="application/pdf" title="Baixar caderno A4 para imprimir com as seis missões, quizzes e parecer final">↓ Baixar PDF imprimível (atividades)</a><span class="small">Ficha A4 de 3 páginas, com espaço para respostas e sem gabarito.</span></div>
+      <div class="grid grid-2">
+        <div class="panel panel-mint" style="display:flex;align-items:center;gap:22px;flex-wrap:wrap"><div class="donut" id="scoreDonut"><div><strong id="scoreNumber">0</strong><small>de 9 pontos</small></div></div><div style="flex:1;min-width:190px"><h3>Missões resolvidas</h3><p class="small">As respostas corretas são registradas neste navegador. Você pode voltar para melhorar a pontuação.</p><button class="btn-solid" onclick="go(3)">Refazer desafios →</button></div></div>
+        <div class="panel"><h3>Mapa de competências</h3><div id="resultsList"></div></div>
+      </div>
+      <div class="ribbon" style="margin-top:20px"><button class="btn-outline" id="finalExport">Exportar relatório de aprendizagem</button><button class="btn-outline" id="resetProgress">Zerar progresso</button><button class="btn-outline" onclick="window.print()">Imprimir slides</button></div>
+      <p class="micro" style="margin-top:11px">FinLab é um recurso didático independente. Não possui vínculo com instituições financeiras ou influenciadores. Os cenários são fictícios, não configuram recomendação de investimento.</p>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="footer-left"><span class="counter" id="counter">01 / 16</span><div class="progress" id="progress" aria-label="Navegação dos slides"></div></div>
+    <div class="keys">← → mudar slide &nbsp;·&nbsp; F tela cheia &nbsp;·&nbsp; P professor</div>
+    <div class="nav-actions"><button class="btn-outline" id="prev" aria-label="Slide anterior">←</button><button class="btn-solid" id="next">Próximo →</button></div>
+  </footer>
+</div>
+<script>
+(() => {
+  'use strict';
+  const $=id=>document.getElementById(id);
+  const slides=[...document.querySelectorAll('.slide')];
+  const fmt=(x,decimals=0)=>new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL',minimumFractionDigits:decimals,maximumFractionDigits:decimals}).format(Number.isFinite(x)?x:0);
+  const pct=(x,decimals=0)=>new Intl.NumberFormat('pt-BR',{style:'percent',minimumFractionDigits:decimals,maximumFractionDigits:decimals}).format(Number.isFinite(x)?x:0);
+  const storageKey='finlab-slides-v1';
+  let state={done:{},name:'',report:''},current=0;
+  try{const old=JSON.parse(localStorage.getItem(storageKey)||'null'); if(old && typeof old==='object') state={...state,...old,done:old.done||{}}}catch{}
+  const save=()=>{try{localStorage.setItem(storageKey,JSON.stringify(state))}catch{}};
+  const keys=['credit','invest','inflation','portfolio','business','formula','q1','q2','q3'];
+  const labels=['Comparar bancos','Simular aportes','Entender inflação','Montar carteira','Avaliar negócio','Criar fórmulas','Quiz: juros','Quiz: risco','Quiz: gráficos'];
+  const mark=id=>{state.done[id]=true;save();renderResults()};
+  const feedback=(id,ok,msg)=>{const el=$(id);el.classList.remove('ok','no');el.classList.add(ok?'ok':'no');el.textContent=msg};
+  const progress=$('progress');
+  slides.forEach((el,i)=>{const b=document.createElement('button');b.className='dot';b.title=`Slide ${i+1}: ${el.dataset.title}`;b.setAttribute('aria-label',b.title);b.addEventListener('click',()=>go(i));progress.appendChild(b)});
+  function go(index){current=Math.max(0,Math.min(slides.length-1,index));slides.forEach((el,i)=>{el.classList.toggle('active',i===current);el.setAttribute('aria-hidden',String(i!==current));if(i===current) el.scrollTop=0});$('counter').textContent=`${String(current+1).padStart(2,'0')} / ${String(slides.length).padStart(2,'0')}`;$('prev').disabled=current===0;$('next').disabled=current===slides.length-1;$('next').textContent=current===slides.length-1?'Fim ✓':'Próximo →';[...progress.children].forEach((d,i)=>d.className='dot'+(i===current?' active':i<current?' past':''));document.title=`FinLab · ${slides[current].dataset.title}`;if(current===4) drawInterest();if(current===15)renderResults()}
+  window.go=go;
+  $('prev').addEventListener('click',()=>go(current-1));$('next').addEventListener('click',()=>go(current+1));
+  $('teacherBtn').addEventListener('click',()=>{const show=document.body.classList.toggle('teacher');$('teacherBtn').classList.toggle('teacher-on',show);$('teacherBtn').setAttribute('aria-pressed',String(show))});
+  async function fullscreen(){try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen()}catch{}}
+  $('fullscreenBtn').addEventListener('click',fullscreen);
+  document.addEventListener('keydown',e=>{const tag=document.activeElement?.tagName||'';if(['TEXTAREA','INPUT','SELECT'].includes(tag))return;if(e.altKey||e.ctrlKey||e.metaKey)return;if(e.key==='ArrowRight'||e.key==='PageDown'){e.preventDefault();go(current+1)}else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();go(current-1)}else if(e.key.toLowerCase()==='f')fullscreen();else if(e.key.toLowerCase()==='p')$('teacherBtn').click()});
+  let touchStart=null;document.getElementById('deck').addEventListener('touchstart',e=>{if(e.target.closest('button,input,select,textarea'))return;touchStart={x:e.touches[0].clientX,y:e.touches[0].clientY}},{passive:true});document.getElementById('deck').addEventListener('touchend',e=>{if(!touchStart)return;const dx=e.changedTouches[0].clientX-touchStart.x,dy=e.changedTouches[0].clientY-touchStart.y;if(Math.abs(dx)>70&&Math.abs(dx)>Math.abs(dy)*1.6)go(current+(dx<0?1:-1));touchStart=null},{passive:true});
+  const v=id=>Number($(id).value);
+  function bind(ids,fn){ids.forEach(id=>$(id).addEventListener('input',fn));fn()}
+  let loan={A:5950,B:5858.3};
+  function updateLoan(){const c=v('loanCapital'),r=v('loanRate')/100,n=v('loanMonths'),fee=v('loanFee');loan={A:c*(1+r*n)+fee,B:c*Math.pow(1+r,n)};$('loanCapitalOut').textContent=fmt(c);$('loanRateOut').textContent=pct(r,1)+' a.m.';$('loanMonthsOut').textContent=n+' meses';$('loanFeeOut').textContent=fmt(fee);$('loanA').textContent=fmt(loan.A,2);$('loanB').textContent=fmt(loan.B,2);document.querySelectorAll('[data-credit]').forEach(x=>x.classList.remove('selected','correct','wrong'));$('loanFeedback').className='feedback';$('loanFeedback').textContent='Qual banco custa menos neste cenário?'}
+  bind(['loanCapital','loanRate','loanMonths','loanFee'],updateLoan);
+  document.querySelectorAll('[data-credit]').forEach(b=>b.addEventListener('click',()=>{const correct=Math.abs(loan.A-loan.B)<.005?'empate':loan.A<loan.B?'A':'B',pick=b.dataset.credit;document.querySelectorAll('[data-credit]').forEach(x=>x.classList.remove('selected','correct','wrong'));b.classList.add(pick===correct?'correct':'wrong');if(pick===correct){mark('credit');feedback('loanFeedback',true,`Correto! ${pick} é mais barato por ${fmt(Math.abs(loan.A-loan.B),2)}. Alterar a tarifa ou o prazo pode mudar a decisão.`)}else if(correct==='empate'){feedback('loanFeedback',false,'Há empate neste cenário. Experimente alterar prazo ou tarifa para desempatar.') }else feedback('loanFeedback',false,`Ainda não: o Banco ${correct} custa ${fmt(Math.abs(loan.A-loan.B),2)} menos. Observe o custo total, não apenas a taxa.`)}));
+  function drawInterest(){const c=5000,r=.02,n=8,sim=[],comp=[];for(let t=0;t<=n;t++){sim.push(c*(1+r*t));comp.push(c*Math.pow(1+r,t))}const low=c-30,high=Math.max(...comp)*1.02,plot=a=>a.map((val,i)=>`${i===0?'M':'L'}${(45+i*(533/n)).toFixed(1)},${(235-(val-low)/(high-low)*202).toFixed(1)}`).join(' ');$('simplePath').setAttribute('d',plot(sim));$('compoundPath').setAttribute('d',plot(comp))}
+  function updateInvest(){const initial=v('invInitial'),monthly=v('invMonthly'),yearly=v('invRate')/100,years=v('invYears');const rm=Math.pow(1+yearly,1/12)-1,n=years*12;const total=initial*Math.pow(1+rm,n)+monthly*(rm<1e-12?n:(Math.pow(1+rm,n)-1)/rm),paid=initial+monthly*n,earned=Math.max(0,total-paid);$('invInitialOut').textContent=fmt(initial);$('invMonthlyOut').textContent=fmt(monthly);$('invRateOut').textContent=pct(yearly)+' ao ano';$('invYearsOut').textContent=`${years} anos`;$('invTotal').textContent=fmt(total);$('invPaid').textContent=fmt(paid);$('invEarn').textContent=fmt(earned);$('invPaidBar').style.width=`${Math.max(0,Math.min(100,paid/Math.max(1,total)*100))}%`;$('invEarnBar').style.width=`${Math.max(0,Math.min(100,earned/Math.max(1,total)*100))}%`}
+  bind(['invInitial','invMonthly','invRate','invYears'],updateInvest);
+  document.querySelectorAll('[data-inv]').forEach(b=>b.addEventListener('click',()=>{const ok=b.dataset.inv==='paid';document.querySelectorAll('[data-inv]').forEach(x=>x.classList.remove('correct','wrong'));b.classList.add(ok?'correct':'wrong');feedback('invFeedback',ok,ok?'Isso! O capital inicial e os aportes mensais saíram do seu bolso. O restante é rendimento hipotético.':'Quase. Rendimento é o ganho projetado; depósito é o dinheiro que você colocou.');if(ok)mark('invest')}));
+  function updateInflation(){const rn=v('infReturn')/100,inf=v('infInflation')/100,real=(1+rn)/(1+inf)-1,purchasing=1000*Math.pow((1+rn)/(1+inf),5);$('infReturnOut').textContent=pct(rn);$('infInflationOut').textContent=pct(inf);$('infReal').textContent=pct(real,2);$('infPurchasing').textContent=fmt(purchasing,2);$('infExplanation').textContent=real>=0?'Neste cenário, o investimento preserva ou amplia o poder de compra.':'Neste cenário, mesmo com rendimento nominal, há perda de poder de compra.'}
+  bind(['infReturn','infInflation'],updateInflation);
+  document.querySelectorAll('[data-inf]').forEach(b=>b.addEventListener('click',()=>{const ok=b.dataset.inf==='fall';document.querySelectorAll('[data-inf]').forEach(x=>x.classList.remove('correct','wrong'));b.classList.add(ok?'correct':'wrong');feedback('infFeedback',ok,ok?'Correto: a inflação maior que o rendimento implica perda real de poder de compra.':'Não. Inflação maior que o rendimento significa que o preço médio cresce mais depressa que o dinheiro.');if(ok)mark('inflation')}));
+  $('checkPortfolio').addEventListener('click',()=>{const picked=[$('portfolioA').value,$('portfolioB').value,$('portfolioC').value],correct=['selic','prefix','ipca'];const hits=picked.filter((x,i)=>x===correct[i]).length;const ok=hits===3;feedback('portfolioFeedback',ok,ok?'3/3! Você associou objetivos à liquidez, ao prazo e à proteção do poder de compra.':'Você acertou '+hits+'/3. Confira a necessidade de liquidez, o vencimento e a proteção contra inflação.');if(ok)mark('portfolio')});
+  let businessProfit=0;
+  function updateBusiness(){const customers=v('bizClients'),price=v('bizPrice'),variable=v('bizVar'),fixed=v('bizFixed'),contrib=price-variable;businessProfit=customers*contrib-fixed;const breakEven=contrib>0?Math.ceil(fixed/contrib):null;const payback=businessProfit>0?Math.ceil(5000/businessProfit):null;$('bizClientsOut').textContent=`${customers} atendimentos`;$('bizPriceOut').textContent=fmt(price);$('bizVarOut').textContent=fmt(variable);$('bizFixedOut').textContent=fmt(fixed);$('bizProfit').textContent=fmt(businessProfit);$('bizBreakeven').textContent=breakEven===null?'Inviável':String(breakEven);$('bizPayback').textContent=payback===null?'Não recupera neste cenário':payback+' meses';document.querySelectorAll('[data-biz]').forEach(x=>x.classList.remove('correct','wrong'));$('bizFeedback').className='feedback';$('bizFeedback').textContent='Confira o resultado mensal. Ele é positivo?'}
+  bind(['bizClients','bizPrice','bizVar','bizFixed'],updateBusiness);
+  document.querySelectorAll('[data-biz]').forEach(b=>b.addEventListener('click',()=>{const ok=(b.dataset.biz==='positive')===(businessProfit>0);document.querySelectorAll('[data-biz]').forEach(x=>x.classList.remove('correct','wrong'));b.classList.add(ok?'correct':'wrong');feedback('bizFeedback',ok,ok?'Muito bem! Você avaliou receita menos custos, não apenas o faturamento.':'Não é só olhar a receita: multiplique atendimentos pela margem de contribuição e subtraia os custos fixos.');if(ok)mark('business')}));
+  document.querySelectorAll('[data-formula]').forEach(b=>b.addEventListener('click',()=>{const ok=b.dataset.formula==='right';document.querySelectorAll('[data-formula]').forEach(x=>x.classList.remove('correct','wrong'));b.classList.add(ok?'correct':'wrong');feedback('formulaFeedback',ok,ok?'Correto! A potência representa a capitalização; os $ mantêm fixos capital e taxa.':'Tente novamente. Juros compostos exigem potência; copiar a fórmula não deve deslocar G1 e G2.');if(ok)mark('formula')}));
+  const quizAnswers={q1:'b',q2:'c',q3:'b'};const quizWhy={q1:'5.000 × (1 + 0,02 × 8) = R$ 5.800,00.',q2:'Antes do vencimento, o preço pode variar com as taxas de mercado.',q3:'Linhas são adequadas para mostrar evolução ao longo dos anos.'};
+  document.querySelectorAll('[data-quiz]').forEach(b=>b.addEventListener('click',()=>{const id=b.dataset.quiz,ok=b.dataset.answer===quizAnswers[id];document.querySelectorAll(`[data-quiz="${id}"]`).forEach(x=>x.classList.remove('correct','wrong'));b.classList.add(ok?'correct':'wrong');feedback(id+'Feedback',ok,ok?'Acertou! '+quizWhy[id]:'Ainda não. Revise os dados e tente outra alternativa.');if(ok)mark(id)}));
+  $('studentName').value=state.name||'';$('studentReport').value=state.report||'';
+  const persistReport=()=>{state.name=$('studentName').value.trim();state.report=$('studentReport').value.trim();save();$('saveStatus').textContent='Respostas salvas neste navegador.'};
+  $('saveReport').addEventListener('click',persistReport);$('studentName').addEventListener('input',persistReport);$('studentReport').addEventListener('input',persistReport);
+  function reportText(){persistReport();return [`FINLAB — RELATÓRIO DE APRENDIZAGEM`,`Equipe: ${state.name||'Não informado'}`,`Data: ${new Date().toLocaleDateString('pt-BR')}`,`Pontuação: ${keys.filter(k=>state.done[k]).length}/9`, '',...keys.map((k,i)=>`${state.done[k]?'[X]':'[ ]'} ${labels[i]}`),'','PARECER DA EQUIPE',state.report||'(não preenchido)','','Modelo didático: não é aconselhamento financeiro.'].join('\n')}
+  function download(){const blob=new Blob([reportText()],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='finlab-relatorio-de-aprendizagem.txt';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500)}
+  $('downloadReport').addEventListener('click',download);$('finalExport').addEventListener('click',download);
+  function renderResults(){const count=keys.filter(k=>state.done[k]).length;$('scoreNumber').textContent=count;$('scoreDonut').style.setProperty('--complete',`${count/keys.length*100}%`);const list=$('resultsList');list.replaceChildren();for(let i=0;i<keys.length;i++){const row=document.createElement('div');row.className='mission-row';const left=document.createElement('span');left.className='small';left.textContent=labels[i];const right=document.createElement('span');right.className='done';right.textContent=state.done[keys[i]]?'✓':'○';row.append(left,right);list.appendChild(row)}}
+  $('resetProgress').addEventListener('click',()=>{if(confirm('Zerar todas as respostas e o parecer salvos neste navegador?')){state={done:{},name:'',report:''};save();$('studentName').value='';$('studentReport').value='';renderResults();$('saveStatus').textContent='Progresso reiniciado.'}});
+  go(0);renderResults();
+})();
+</script>
+</body>
+</html>
